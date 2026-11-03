@@ -13,8 +13,6 @@ class LoginView extends StatelessWidget {
       child: Scaffold(
         body: SizedBox(
           width: double.infinity,
-
-
           child: Column(
             children: [
               SizedBox(height: 62),
