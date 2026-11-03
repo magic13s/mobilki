@@ -14,33 +14,53 @@ class LoginView extends StatelessWidget {
       child: Scaffold(
         body: SizedBox(
           width: double.infinity,
-          child: Column(
-            children: [
-              SizedBox(height: 62),
-              Image.asset(AppImages.logo, width: 129, height: 129),
-              SizedBox(height: 21,),
-              Text(
-                  AppTexts.signIn,
-                  style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.purpleColor)
-              ),
-              ElevatedButton(
-                child: const Text('Open route'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (context) => const RegisteView(),
-                    ),
-                  );
-                },
-              ),
-            ],
+
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                SizedBox(height: 62),
+                Image.asset(AppImages.logo, width: 129, height: 129),
+                SizedBox(height: 21),
+                _signIn,
+                SizedBox(height: 46),
+                TextFormField(),
+                SizedBox(height: 40),
+                TextFormField(),
+                ElevatedButton(
+                  child: const Text('Open route'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (context) => const RegisteView(),
+                      ),
+                    );
+                  },
+                ),
+                GestureDetector(
+                  onTap: () => print("kliknieto"),
+                  child: Text(AppTexts.signUp, style: TextStyle(fontSize: 30)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+Widget get _signIn {
+  return Align(
+    alignment: .topLeft,
+    child: Text(
+      AppTexts.signIn,
+      style: TextStyle(
+        fontSize: 30,
+        fontWeight: FontWeight.w700,
+        color: AppColors.purpleColor,
+      ),
+    ),
+  );
 }
