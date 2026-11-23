@@ -14,7 +14,7 @@ class LoginView extends StatelessWidget {
       child: Scaffold(
         body: SizedBox(
           width: double.infinity,
-
+          fhdiwsgrejik
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
