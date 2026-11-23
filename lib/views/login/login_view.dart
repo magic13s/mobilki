@@ -25,7 +25,7 @@ class LoginView extends StatelessWidget {
                 _signIn,
                 SizedBox(height: 46),
                 TextFormField(),
-                SizedBox(height: 40),
+                SizedBox(height: 70),
                 TextFormField(),
                 ElevatedButton(
                   child: const Text('Open route'),
