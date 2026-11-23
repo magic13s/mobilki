@@ -1,30 +1,27 @@
 import 'package:dsw60269/utils/app_colors.dart';
+import 'package:dsw60269/utils/app_images.dart';
 import 'package:dsw60269/utils/app_texts.dart';
 import 'package:flutter/material.dart';
 
-class RegisteView extends StatefulWidget {
-  const RegisteView({super.key});
+import '../register/registe_view.dart';
+
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<RegisteView> createState() => _RegisteViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _RegisteViewState extends State<RegisteView> {
+class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-
   bool _obscurePassword = true;
-  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -50,66 +47,31 @@ class _RegisteViewState extends State<RegisteView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 36),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      foregroundColor: AppColors.purpleColor,
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_ios, size: 16),
-                    label: const Text(
-                      'Back',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                const SizedBox(height: 16),
+                Center(
+                  child: Image.asset(
+                    AppImages.logo,
+                    width: 120,
+                    height: 120,
+                    fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 28),
+                const SizedBox(height: 24),
                 Text(
-                  AppTexts.signUp,
+                  AppTexts.signIn,
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
                     color: AppColors.purpleColor,
                   ),
                 ),
-                const SizedBox(height: 28),
-                TextFormField(
-                  controller: _nameController,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    hintText: 'Full Name',
-                    prefixIcon: const Icon(Icons.person_outline),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
-                    enabledBorder: _inputBorder(),
-                    focusedBorder: _inputBorder(
-                      color: AppColors.purpleColor,
-                      width: 1.8,
-                    ),
-                    errorBorder: _inputBorder(color: Colors.red),
-                    focusedErrorBorder: _inputBorder(
-                      color: Colors.red,
-                      width: 1.8,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    hintText: 'Email',
-                    prefixIcon: const Icon(Icons.mail_outline),
+                    hintText: 'Email or User name',
+                    prefixIcon: const Icon(Icons.person_outline),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 16,
@@ -130,7 +92,6 @@ class _RegisteViewState extends State<RegisteView> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: _obscurePassword,
-                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock_outline),
@@ -162,43 +123,22 @@ class _RegisteViewState extends State<RegisteView> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  obscureText: _obscureConfirmPassword,
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                    hintText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureConfirmPassword
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      // TODO: obsługa "Forgot Password?"
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: AppColors.purpleColor,
+                        fontWeight: FontWeight.w500,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureConfirmPassword = !_obscureConfirmPassword;
-                        });
-                      },
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
-                    enabledBorder: _inputBorder(),
-                    focusedBorder: _inputBorder(
-                      color: AppColors.purpleColor,
-                      width: 1.8,
-                    ),
-                    errorBorder: _inputBorder(color: Colors.red),
-                    focusedErrorBorder: _inputBorder(
-                      color: Colors.red,
-                      width: 1.8,
                     ),
                   ),
                 ),
-                const SizedBox(height: 36),
+                const SizedBox(height: 12),
                 SizedBox(
                   height: 52,
                   child: ElevatedButton(
@@ -211,10 +151,10 @@ class _RegisteViewState extends State<RegisteView> {
                       elevation: 0,
                     ),
                     onPressed: () {
-                      // TODO: logika rejestracji
+                      // TODO: logika logowania
                     },
                     child: Text(
-                      AppTexts.signUp,
+                      AppTexts.signIn,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -222,18 +162,58 @@ class _RegisteViewState extends State<RegisteView> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 28),
+                const Center(
+                  child: Text(
+                    'Or sign in with',
+                    style: TextStyle(color: Colors.black54, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _SocialIconButton(
+                      label: 'G',
+                      color: const Color(0xFFDB4437),
+                      onTap: () {},
+                    ),
+                    _SocialIconButton(
+                      label: 'f',
+                      color: const Color(0xFF1877F2),
+                      onTap: () {},
+                    ),
+                    _SocialIconButton(
+                      label: 'X',
+                      color: Colors.black,
+                      onTap: () {},
+                    ),
+                    _SocialIconButton(
+                      label: 'in',
+                      color: const Color(0xFF0A66C2),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account? ',
+                      "Don't have account? ",
                       style: TextStyle(color: Colors.black87),
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (context) => const RegisteView(),
+                          ),
+                        );
+                      },
                       child: Text(
-                        AppTexts.signIn,
+                        AppTexts.signUp,
                         style: const TextStyle(
                           color: AppColors.purpleColor,
                           fontWeight: FontWeight.w700,
@@ -244,6 +224,37 @@ class _RegisteViewState extends State<RegisteView> {
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SocialIconButton extends StatelessWidget {
+  const _SocialIconButton({
+    required this.label,
+    required this.color,
+    required this.onTap,
+  });
+
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w800,
+            color: color,
           ),
         ),
       ),

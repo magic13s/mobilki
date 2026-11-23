@@ -1,3 +1,5 @@
+import 'package:dsw60269/utils/app_colors.dart';
+import 'package:dsw60269/utils/app_texts.dart';
 import 'package:flutter/material.dart';
 
 class RegisteView extends StatefulWidget {
@@ -8,8 +10,6 @@ class RegisteView extends StatefulWidget {
 }
 
 class _RegisteViewState extends State<RegisteView> {
-  static const Color _purpleColor = Color(0xFF6A35E8);
-
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -28,22 +28,14 @@ class _RegisteViewState extends State<RegisteView> {
     super.dispose();
   }
 
-  OutlineInputBorder _border({
-    Color color = const Color(0xFFD0D5DD),
-    double width = 1.2,
-  }) {
+  OutlineInputBorder _inputBorder({Color? color, double width = 1.2}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: color, width: width),
+      borderSide: BorderSide(
+        color: color ?? Colors.grey.shade400,
+        width: width,
+      ),
     );
-  }
-
-  void _submit() {
-    if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Formularz rejestracji poprawny')),
-      );
-    }
   }
 
   @override
@@ -61,8 +53,14 @@ class _RegisteViewState extends State<RegisteView> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: const Size(0, 36),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      foregroundColor: AppColors.purpleColor,
+                    ),
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_ios_new, size: 16),
+                    icon: const Icon(Icons.arrow_back_ios, size: 16),
                     label: const Text(
                       'Back',
                       style: TextStyle(
@@ -70,21 +68,15 @@ class _RegisteViewState extends State<RegisteView> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    style: TextButton.styleFrom(
-                      foregroundColor: _purpleColor,
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 36),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
                   ),
                 ),
                 const SizedBox(height: 28),
-                const Text(
-                  'Sign Up',
-                  style: TextStyle(
+                Text(
+                  AppTexts.signUp,
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
-                    color: _purpleColor,
+                    color: AppColors.purpleColor,
                   ),
                 ),
                 const SizedBox(height: 28),
@@ -98,17 +90,17 @@ class _RegisteViewState extends State<RegisteView> {
                       horizontal: 16,
                       vertical: 16,
                     ),
-                    enabledBorder: _border(),
-                    focusedBorder: _border(color: _purpleColor, width: 1.8),
-                    errorBorder: _border(color: Colors.red),
-                    focusedErrorBorder: _border(color: Colors.red, width: 1.8),
+                    enabledBorder: _inputBorder(),
+                    focusedBorder: _inputBorder(
+                      color: AppColors.purpleColor,
+                      width: 1.8,
+                    ),
+                    errorBorder: _inputBorder(color: Colors.red),
+                    focusedErrorBorder: _inputBorder(
+                      color: Colors.red,
+                      width: 1.8,
+                    ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Podaj imię i nazwisko';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
@@ -122,21 +114,17 @@ class _RegisteViewState extends State<RegisteView> {
                       horizontal: 16,
                       vertical: 16,
                     ),
-                    enabledBorder: _border(),
-                    focusedBorder: _border(color: _purpleColor, width: 1.8),
-                    errorBorder: _border(color: Colors.red),
-                    focusedErrorBorder: _border(color: Colors.red, width: 1.8),
+                    enabledBorder: _inputBorder(),
+                    focusedBorder: _inputBorder(
+                      color: AppColors.purpleColor,
+                      width: 1.8,
+                    ),
+                    errorBorder: _inputBorder(color: Colors.red),
+                    focusedErrorBorder: _inputBorder(
+                      color: Colors.red,
+                      width: 1.8,
+                    ),
                   ),
-                  validator: (value) {
-                    final text = value?.trim() ?? '';
-                    if (text.isEmpty) {
-                      return 'Podaj adres e-mail';
-                    }
-                    if (!text.contains('@') || !text.contains('.')) {
-                      return 'Niepoprawny adres e-mail';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
@@ -153,31 +141,32 @@ class _RegisteViewState extends State<RegisteView> {
                             : Icons.visibility_outlined,
                       ),
                       onPressed: () {
-                        setState(() => _obscurePassword = !_obscurePassword);
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
                       },
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 16,
                     ),
-                    enabledBorder: _border(),
-                    focusedBorder: _border(color: _purpleColor, width: 1.8),
-                    errorBorder: _border(color: Colors.red),
-                    focusedErrorBorder: _border(color: Colors.red, width: 1.8),
+                    enabledBorder: _inputBorder(),
+                    focusedBorder: _inputBorder(
+                      color: AppColors.purpleColor,
+                      width: 1.8,
+                    ),
+                    errorBorder: _inputBorder(color: Colors.red),
+                    focusedErrorBorder: _inputBorder(
+                      color: Colors.red,
+                      width: 1.8,
+                    ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.length < 6) {
-                      return 'Hasło musi mieć min. 6 znaków';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: _obscureConfirmPassword,
                   textInputAction: TextInputAction.done,
-                  onFieldSubmitted: (_) => _submit(),
                   decoration: InputDecoration(
                     hintText: 'Confirm Password',
                     prefixIcon: const Icon(Icons.lock_outline),
@@ -188,44 +177,45 @@ class _RegisteViewState extends State<RegisteView> {
                             : Icons.visibility_outlined,
                       ),
                       onPressed: () {
-                        setState(
-                          () => _obscureConfirmPassword =
-                              !_obscureConfirmPassword,
-                        );
+                        setState(() {
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
+                        });
                       },
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 16,
                     ),
-                    enabledBorder: _border(),
-                    focusedBorder: _border(color: _purpleColor, width: 1.8),
-                    errorBorder: _border(color: Colors.red),
-                    focusedErrorBorder: _border(color: Colors.red, width: 1.8),
+                    enabledBorder: _inputBorder(),
+                    focusedBorder: _inputBorder(
+                      color: AppColors.purpleColor,
+                      width: 1.8,
+                    ),
+                    errorBorder: _inputBorder(color: Colors.red),
+                    focusedErrorBorder: _inputBorder(
+                      color: Colors.red,
+                      width: 1.8,
+                    ),
                   ),
-                  validator: (value) {
-                    if (value != _passwordController.text) {
-                      return 'Hasła nie są identyczne';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 36),
                 SizedBox(
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: _submit,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _purpleColor,
+                      backgroundColor: AppColors.purpleColor,
                       foregroundColor: Colors.white,
-                      elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      elevation: 0,
                     ),
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(
+                    onPressed: () {
+                      // TODO: logika rejestracji
+                    },
+                    child: Text(
+                      AppTexts.signUp,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -242,10 +232,10 @@ class _RegisteViewState extends State<RegisteView> {
                     ),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: _purpleColor,
+                      child: Text(
+                        AppTexts.signIn,
+                        style: const TextStyle(
+                          color: AppColors.purpleColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
